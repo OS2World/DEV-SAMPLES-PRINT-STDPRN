@@ -1,0 +1,24 @@
+CC_DEBUG    = cl -c -Alfu -G2s -Od -Zi
+CC_NODEBUG  = cl -c -Alfu -G2s -Os
+LN_DEBUG    = link /nod /co /noi
+LN_NODEBUG  = link /nod /noi
+CC          = $(CC_NODEBUG)
+LINK        = $(LN_NODEBUG)
+
+openprn.obj:    openprn.c
+    $(CC) openprn.c
+
+startdoc.obj:   startdoc.c
+    $(CC) startdoc.c
+
+enddoc.obj:     enddoc.c
+    $(CC) enddoc.c
+
+stdprn.dll:     openprn.obj startdoc.obj enddoc.obj stdprn.def
+    $(LINK) openprn startdoc enddoc,stdprn.dll,nul,llibcdll os2,stdprn;
+
+stdprn.lib:     stdprn.def
+    implib stdprn.lib stdprn.def
+
+stdprn.hlp:     stdprn.txt
+    helpmake /e15 /t /a: /ostdprn.hlp stdprn.txt

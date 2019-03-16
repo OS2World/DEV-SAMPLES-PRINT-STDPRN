@@ -1,0 +1,8 @@
+LIBRARY     STDPRN
+DESCRIPTION 'Standard printer function library. (c)Copyright 1989 Rick Yoder'
+PROTMODE
+DATA MULTIPLE
+EXPORTS
+    OPENDEFAULTPRINTERDC    @1
+    STARTDOCUMENT           @2
+    ENDDOCUMENT             @3

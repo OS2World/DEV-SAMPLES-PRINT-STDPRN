@@ -1,0 +1,108 @@
+.context List Categories
+.list
+Printer functions
+.context Printer functions
+.list
+OpenDefaultPrinterDC        Open device context for current default printer.
+StartDocument               Signal spooler that a new print job is starting.
+EndDocument                 End current print job.
+.context OpenDefaultPrinterDC
+.ref StartDocument, EndDocument, DevOpenDC, DevCloseDC, DevEscape
+#define INCL_DEV
+#include <os2.h>
+#include <stdprn.h>
+
+.paste Syntax
+HDC \bOpenDefaultPrinterDC\p( \ihab\p,\ipszAppName\p,\ipszRedirect\p )
+HAB \ihab\p;            /* anchor-block handle             */
+PSZ \ipszAppName\p;     /* application name                */
+PSZ \ipszRedirect\p;    /* printer output redirection file */
+.end
+
+The \bOpenDefaultPrinterDC\p function opens a device context for the current
+default printer. Use the \bDevCloseDC\p function to close this device context
+when you are finished with it.
+
+\bParameters      Description\p
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+\ihab\p             Identifies the anchor block.
+
+\ipszAppName\p      Points to a null-terminated string that contains the
+                application name.
+
+\ipszRedirect\p     Points to a null-terminated string that contains the
+                name of the file to which printer output is to be
+                redirected. This parameter is set to NULL if no output
+                redirection is to take place.
+
+
+\bReturn Value\p
+
+The return value identifies the opened printer device context if the
+function is successful. The return value is DEV_ERROR if the function
+is unsuccessful.
+
+
+\bSee Also\p
+
+\bStartDocument\p, \bEndDocument\p, \bDevOpenDC\p, \bDevCloseDC\p, \bDevEscape\p
+.context StartDocument
+.ref OpenDefaultPrinterDC, EndDocument, DevOpenDC, DevCloseDC, DevEscape
+#define INCL_DEV
+#include <os2.h>
+#include <stdprn.h>
+
+.paste Syntax
+LONG \bStartDocument\p( \ihdcPrinter\p,\ipszDocName\p )
+HDC \ihdcPrinter\p;     /* device-context handle */
+PSZ \ipszDocName\p;     /* document name         */
+.end
+
+The \bStartDocument\p function signals the print spooler that a new print
+job is starting.
+
+\bParameters      Description\p
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+\ihdcPrinter\p      Identifies the printer device context.
+
+\ipszDocName\p      Points to a null-terminated string containing the
+                name of the document
+
+
+\bReturn Value\p
+
+This function returns DEV_OK if no error occurred, otherwise it returns
+a value of DEVESC_ERROR or DEVESC_NOTIMPLEMENTED.
+
+
+\bSee Also\p
+
+\bOpenDefaultPrinterDC\p, \bEndDocument\p, \bDevOpenDC\p, \bDevCloseDC\p, \bDevEscape\p
+.context EndDocument
+.ref OpenDefaultPrinterDC, StartDocument, DevOpenDC, DevCloseDC, DevEscape
+#define INCL_DEV
+#include <os2.h>
+#include <stdprn.h>
+
+.paste Syntax
+LONG \bEndDocument\p( \ihdcPrinter\p )
+HDC \ihdcPrinter\p;     /* device-context handle */
+.end
+
+The \bEndDocument\p function ends a print job started by the \bStartDocument\p
+function.
+
+\bParameters      Description\p
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+\ihdcPrinter\p      Identifies the printer device context.
+
+
+\bReturn Value\p
+
+This function returns DEV_OK if no error occurred, otherwise it returns
+a value of DEVESC_ERROR or DEVESC_NOTIMPLEMENTED.
+
+
+\bSee Also\p
+
+\bOpenDefaultPrinterDC\p, \bStartDocument\p, \bDevOpenDC\p, \bDevCloseDC\p, \bDevEscape\p
